@@ -3,9 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
-      "@helpers/*": [
-        "helpers/*"
-      ]
+      "@helpers/*": ["helpers/*"]
     }
   }
 }

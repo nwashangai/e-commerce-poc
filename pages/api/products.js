@@ -12,19 +12,14 @@ export default async (req, res) => {
     let data;
     const { query } = req;
     const products = await getProducts();
-    const paginated = paginate({
-      page: Number(query.page || 1),
-      limit: Number(query.limit || 4),
-      data: products,
-    });
     data = sort(
       query.sort
         ? {
             sortBy: query.sort[0],
             direction: query.sort[1],
-            data: paginated.data,
+            data: products,
           }
-        : { data: paginated.data }
+        : { data: products }
     );
 
     if (query.categories) {
@@ -39,7 +34,13 @@ export default async (req, res) => {
       );
     }
 
-    return res.status(200).json({ ...paginated, data });
+    const paginated = paginate({
+      page: Number(query.page || 1),
+      limit: Number(query.limit || 4),
+      data,
+    });
+
+    return res.status(200).json({ ...paginated });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: 'Server was interupted' });

@@ -7,6 +7,19 @@
   display: none;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+animate-spin {
+  animation: spin 1s linear infinite;
+}
+
 @media (min-width: 1024px) {
   .hover-trigger .hover-target {
     display: none;
@@ -15,4 +28,42 @@
   .hover-trigger:hover .hover-target {
     display: block;
   }
+}
+
+/* icons */
+
+.check {
+  /* Rectangle 13 */
+
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  left: 101px;
+  top: 1649px;
+
+  border: 2px solid #000000;
+  box-sizing: border-box;
+
+  /* Vector 15 */
+
+  position: absolute;
+  width: 13px;
+  height: 9px;
+  left: 106px;
+  top: 1657px;
+
+  border: 4px solid #000000;
+}
+
+.uncheck {
+  /* Rectangle 21 */
+
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  left: 97px;
+  top: 2265px;
+
+  border: 2px solid #000000;
+  box-sizing: border-box;
 }
