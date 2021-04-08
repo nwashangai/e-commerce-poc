@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import queryString from 'query-string';
 import useSWR from 'swr';
 import Image from 'next/image';
@@ -43,6 +44,11 @@ export default () => {
   const clearCart = () => {
     setCart([]);
     setIsCartOpen(false);
+  };
+
+  const clearFilter = () => {
+    setParams({ ...params, categories: [], maxPrice: undefined, minPrice: undefined });
+    setIsFilter(false)
   };
 
   const filterCategory = (categoryName) => {
@@ -98,9 +104,7 @@ export default () => {
 
       <main className="flex-1 lg:container max-w-5xl md:px-1">
         <div className="flex flex-col items-center justify-center">
-          {featured && (
-            <Featured product={featured} addToCart={addItemToCart} />
-          )}
+          <Featured product={featured} addToCart={addItemToCart} />
           <hr className="w-full border-line" />
           <ProductHeader
             toggleFilter={setIsFilter}
@@ -118,28 +122,28 @@ export default () => {
               maxPrice={params.maxPrice}
               filterPriceRange={filterPriceRange}
             />
-            {isLoadinng ? (
-              <div className="m-auto">loading...</div>
-            ) : (
-              products && (
+            
                 <Products
-                  next={products.next}
-                  prev={products.prev}
+                  next={products ? products.next : 0}
+                  prev={products ? products.prev : 0}
                   current={params.page}
-                  total={products.total}
+                  total={products ? products.total : 1}
                   limit={4}
                   paginate={paginate}
                 >
-                  {products.data.map((product, key) => (
+                  {products ? products.data.map((product, key) => (
                     <Product
                       key={key}
                       product={product}
                       addToCart={addItemToCart}
                     />
-                  ))}
+                  )) : <>
+                  <Skeleton width={288} height={516} />
+                  <Skeleton width={288} height={516} />
+                  <Skeleton width={288} height={516} />
+                  <Skeleton width={288} height={516} />
+                  </>}
                 </Products>
-              )
-            )}
           </div>
           {isFilter && (
             <div className="fixed bg-pure top-2 lg:hidden w-full h-screen z-10">
@@ -159,6 +163,7 @@ export default () => {
               <div className="px-4 my-3">
                 <Filter
                   show
+                  clearFilter={clearFilter}
                   categories={categories}
                   priceRange={priceRange}
                   activeCategories={params.categories}
@@ -174,11 +179,11 @@ export default () => {
                   <Button
                     type="secondary"
                     text="Cancel"
-                    onClick={() => setIsFilter(false)}
+                    onClick={clearFilter}
                   />
                 </div>
                 <div className="w-36">
-                  <Button type="primary" text="Save" />
+                  <Button type="primary" text="Save" onClick={() => setIsFilter(false)} />
                 </div>
               </div>
             </div>

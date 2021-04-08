@@ -5,7 +5,7 @@ const Products = (props) => (
     <div className="flex justify-evenly flex-wrap">{props.children}</div>
     <div className="flex mx-auto">
       <span
-        className="mx-2 cursor-pointer"
+        className={`mx-2 ${props.prev && 'cursor-pointer'}`}
         onClick={() => (!!props.prev ? props.paginate(props.prev) : null)}
       >
         <Image
@@ -34,7 +34,7 @@ const Products = (props) => (
           </span>
         ))}
       <span
-        className="mx-2 cursor-pointer"
+        className={`mx-2 ${props.next && 'cursor-pointer'}`}
         onClick={() => (!!props.next ? props.paginate(props.next) : null)}
       >
         <Image

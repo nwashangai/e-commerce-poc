@@ -9,7 +9,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link rel="preconnect" href="https://ik.imagekit.io/03bj5xmyl" />
+          <link rel="dns-prefetch" href="https://ik.imagekit.io/03bj5xmyl" />
+        </Head>
         <body className="font-archivo">
           <Main />
           <NextScript />

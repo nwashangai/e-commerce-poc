@@ -1,6 +1,8 @@
 import faunadb from 'faunadb';
 
-const client = new faunadb.Client({ secret: process.env.DB_SECRET });
+const client = new faunadb.Client({
+  secret: 'fnAEGLsg0cACBVycnMznDOcyruCJzA2ZIBIDnPt8',
+});
 const query = faunadb.query;
 
 export const getProducts = async () => {
