@@ -8,8 +8,6 @@ export default async (req, res) => {
     return res.status(405);
   }
 
-  console.log(req.query);
-
   try {
     let data;
     const { query } = req;
